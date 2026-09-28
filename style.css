@@ -1,0 +1,740 @@
+/* =========================================================
+   Premium Calculator — Stylesheet
+   Dark theme + Glassmorphism + Smooth animations
+   ========================================================= */
+
+/* ---------- CSS Variables (Design Tokens) ---------- */
+:root {
+  /* Colors */
+  --color-bg-gradient-start: #1e1b3a;
+  --color-bg-gradient-mid: #14142b;
+  --color-bg-gradient-end: #0b0b1a;
+
+  --color-glass-bg: rgba(255, 255, 255, 0.06);
+  --color-glass-border: rgba(255, 255, 255, 0.14);
+  --color-glass-highlight: rgba(255, 255, 255, 0.25);
+
+  --color-text-primary: #f5f5fa;
+  --color-text-secondary: rgba(245, 245, 250, 0.55);
+
+  --color-number-bg: rgba(255, 255, 255, 0.07);
+  --color-number-bg-hover: rgba(255, 255, 255, 0.14);
+
+  --color-function-bg: rgba(255, 255, 255, 0.12);
+  --color-function-bg-hover: rgba(255, 255, 255, 0.2);
+  --color-function-text: #ffb199;
+
+  --color-operator-bg: linear-gradient(145deg, #7f5af0, #6246ea);
+  --color-operator-bg-hover: linear-gradient(145deg, #8f6bff, #7457f5);
+  --color-operator-active-bg: #ffffff;
+  --color-operator-active-text: #6246ea;
+
+  --color-equals-bg: linear-gradient(145deg, #ff8a5b, #ff6b6b);
+  --color-equals-bg-hover: linear-gradient(145deg, #ff9c72, #ff7f7f);
+
+  --color-error: #ff6b6b;
+
+  /* Accent — used by button glow, ripple tint, and background glows (NEW) */
+  --color-accent: #7f5af0;
+  --color-accent-soft: rgba(127, 90, 240, 0.35);
+
+  /* Radii */
+  --radius-lg: 32px;
+  --radius-md: 20px;
+  --radius-sm: 14px;
+
+  /* Shadows */
+  --shadow-card: 0 30px 60px rgba(0, 0, 0, 0.45), 0 8px 20px rgba(0, 0, 0, 0.3);
+  --shadow-btn: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-btn-hover: 0 6px 18px rgba(0, 0, 0, 0.35);
+
+  /* Typography */
+  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-medium: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-theme: 0.4s ease; /* NEW — Upgrade 1: theme change speed */
+}
+
+/* =========================================================
+   UPGRADE 1 — THEME SYSTEM
+   Each theme only overrides the color tokens above.
+   Layout, spacing, radii, and shadows tokens are shared,
+   so no CSS is duplicated between themes.
+   Applied via [data-theme="..."] on <html>, set by script.js.
+   ========================================================= */
+
+/* Dark Purple is the default theme and lives in :root above,
+   this block simply mirrors it explicitly for clarity/reset. */
+:root[data-theme="dark"] {
+  --color-bg-gradient-start: #1e1b3a;
+  --color-bg-gradient-mid: #14142b;
+  --color-bg-gradient-end: #0b0b1a;
+  --color-glass-bg: rgba(255, 255, 255, 0.06);
+  --color-glass-border: rgba(255, 255, 255, 0.14);
+  --color-glass-highlight: rgba(255, 255, 255, 0.25);
+  --color-text-primary: #f5f5fa;
+  --color-text-secondary: rgba(245, 245, 250, 0.55);
+  --color-number-bg: rgba(255, 255, 255, 0.07);
+  --color-number-bg-hover: rgba(255, 255, 255, 0.14);
+  --color-function-bg: rgba(255, 255, 255, 0.12);
+  --color-function-bg-hover: rgba(255, 255, 255, 0.2);
+  --color-function-text: #ffb199;
+  --color-operator-bg: linear-gradient(145deg, #7f5af0, #6246ea);
+  --color-operator-bg-hover: linear-gradient(145deg, #8f6bff, #7457f5);
+  --color-operator-active-bg: #ffffff;
+  --color-operator-active-text: #6246ea;
+  --color-equals-bg: linear-gradient(145deg, #ff8a5b, #ff6b6b);
+  --color-equals-bg-hover: linear-gradient(145deg, #ff9c72, #ff7f7f);
+  --color-accent: #7f5af0;
+  --color-accent-soft: rgba(127, 90, 240, 0.35);
+}
+
+/* Light Theme */
+:root[data-theme="light"] {
+  --color-bg-gradient-start: #eef1f8;
+  --color-bg-gradient-mid: #e6ebf7;
+  --color-bg-gradient-end: #dbe2f2;
+  --color-glass-bg: rgba(255, 255, 255, 0.55);
+  --color-glass-border: rgba(255, 255, 255, 0.85);
+  --color-glass-highlight: rgba(255, 255, 255, 0.95);
+  --color-text-primary: #1c1c28;
+  --color-text-secondary: rgba(28, 28, 40, 0.55);
+  --color-number-bg: rgba(0, 0, 0, 0.04);
+  --color-number-bg-hover: rgba(0, 0, 0, 0.08);
+  --color-function-bg: rgba(0, 0, 0, 0.06);
+  --color-function-bg-hover: rgba(0, 0, 0, 0.1);
+  --color-function-text: #c2410c;
+  --color-operator-bg: linear-gradient(145deg, #6366f1, #4f46e5);
+  --color-operator-bg-hover: linear-gradient(145deg, #7577f5, #6154ee);
+  --color-operator-active-bg: #ffffff;
+  --color-operator-active-text: #4f46e5;
+  --color-equals-bg: linear-gradient(145deg, #f59e0b, #ef4444);
+  --color-equals-bg-hover: linear-gradient(145deg, #fbb03b, #f65f5f);
+  --color-accent: #6366f1;
+  --color-accent-soft: rgba(99, 102, 241, 0.25);
+}
+
+/* AMOLED Black Theme — true blacks for OLED power saving & contrast */
+:root[data-theme="amoled"] {
+  --color-bg-gradient-start: #000000;
+  --color-bg-gradient-mid: #000000;
+  --color-bg-gradient-end: #030303;
+  --color-glass-bg: rgba(255, 255, 255, 0.03);
+  --color-glass-border: rgba(255, 255, 255, 0.09);
+  --color-glass-highlight: rgba(255, 255, 255, 0.16);
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.5);
+  --color-number-bg: rgba(255, 255, 255, 0.04);
+  --color-number-bg-hover: rgba(255, 255, 255, 0.09);
+  --color-function-bg: rgba(255, 255, 255, 0.08);
+  --color-function-bg-hover: rgba(255, 255, 255, 0.14);
+  --color-function-text: #ff8a5b;
+  --color-operator-bg: linear-gradient(145deg, #2a2a2a, #101010);
+  --color-operator-bg-hover: linear-gradient(145deg, #3a3a3a, #1a1a1a);
+  --color-operator-active-bg: #ffffff;
+  --color-operator-active-text: #000000;
+  --color-equals-bg: linear-gradient(145deg, #ff3b3b, #b8003a);
+  --color-equals-bg-hover: linear-gradient(145deg, #ff5c5c, #d1004a);
+  --color-accent: #00ff9d;
+  --color-accent-soft: rgba(0, 255, 157, 0.3);
+}
+
+/* Blue Neon Theme */
+:root[data-theme="blue"] {
+  --color-bg-gradient-start: #050b1a;
+  --color-bg-gradient-mid: #071a33;
+  --color-bg-gradient-end: #02060f;
+  --color-glass-bg: rgba(0, 180, 255, 0.07);
+  --color-glass-border: rgba(0, 200, 255, 0.28);
+  --color-glass-highlight: rgba(0, 220, 255, 0.4);
+  --color-text-primary: #eaf6ff;
+  --color-text-secondary: rgba(200, 230, 255, 0.6);
+  --color-number-bg: rgba(0, 180, 255, 0.06);
+  --color-number-bg-hover: rgba(0, 180, 255, 0.13);
+  --color-function-bg: rgba(0, 180, 255, 0.12);
+  --color-function-bg-hover: rgba(0, 180, 255, 0.2);
+  --color-function-text: #66e0ff;
+  --color-operator-bg: linear-gradient(145deg, #00c6ff, #0072ff);
+  --color-operator-bg-hover: linear-gradient(145deg, #33d4ff, #2a8bff);
+  --color-operator-active-bg: #ffffff;
+  --color-operator-active-text: #0072ff;
+  --color-equals-bg: linear-gradient(145deg, #ff6ec7, #ff9a3c);
+  --color-equals-bg-hover: linear-gradient(145deg, #ff8ad4, #ffab5c);
+  --color-accent: #00c6ff;
+  --color-accent-soft: rgba(0, 198, 255, 0.35);
+}
+
+/* ---------- Reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  background: var(--color-bg-gradient-end); /* fallback beneath .background layer */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  /* Upgrade 1: smooth 0.4s color transition whenever the theme changes */
+  transition: background-color var(--transition-theme), color var(--transition-theme);
+}
+
+/* =========================================================
+   UPGRADE 2 — PREMIUM LAYERED BACKGROUND
+   Fixed behind the app (z-index 0), purely decorative.
+   Layers: gradient → grid → glows → shapes → particles.
+   ========================================================= */
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Layer 1: dark gradient base, themed and animated on theme change */
+.bg-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 18% 18%, var(--color-bg-gradient-start), transparent 55%),
+              radial-gradient(circle at 82% 6%, var(--color-accent-soft), transparent 50%),
+              linear-gradient(160deg, var(--color-bg-gradient-mid), var(--color-bg-gradient-end));
+  transition: background var(--transition-theme);
+}
+
+/* Layer 2: subtle grid pattern for depth and structure */
+.bg-grid {
+  position: absolute;
+  inset: -1px;
+  background-image:
+    linear-gradient(var(--color-glass-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-glass-border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.12;
+  mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);
+  transition: opacity var(--transition-theme);
+}
+
+/* Layer 3: soft radial glows that slowly drift (Apple/macOS-style ambient light) */
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  background: radial-gradient(circle, var(--color-accent-soft), transparent 70%);
+  animation: glow-float 16s ease-in-out infinite;
+}
+
+.bg-glow-1 { width: 380px; height: 380px; top: -80px; left: -100px; animation-delay: 0s; }
+.bg-glow-2 { width: 320px; height: 320px; bottom: -100px; right: -80px; animation-delay: -5s; }
+.bg-glow-3 { width: 260px; height: 260px; top: 45%; left: 60%; animation-delay: -10s; }
+
+@keyframes glow-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.08); }
+  66% { transform: translate(-20px, 25px) scale(0.95); }
+}
+
+/* Layer 4: abstract transparent geometric shapes with glass blur */
+.bg-shape {
+  position: absolute;
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: shape-drift 22s linear infinite;
+}
+
+.bg-shape-1 {
+  width: 140px;
+  height: 140px;
+  border-radius: 32px;
+  top: 12%;
+  right: 12%;
+  transform: rotate(18deg);
+  animation-duration: 24s;
+}
+
+.bg-shape-2 {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  bottom: 18%;
+  left: 8%;
+  animation-duration: 28s;
+  animation-direction: reverse;
+}
+
+.bg-shape-3 {
+  width: 110px;
+  height: 110px;
+  border-radius: 24px;
+  bottom: 8%;
+  right: 22%;
+  transform: rotate(-12deg);
+  animation-duration: 20s;
+}
+
+@keyframes shape-drift {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(8deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* Layer 5: soft animated particles rising like light dust */
+.bg-particles {
+  position: absolute;
+  inset: 0;
+}
+
+.particle {
+  position: absolute;
+  bottom: -10px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px 2px var(--color-accent-soft);
+  opacity: 0;
+  animation: particle-rise 12s linear infinite;
+}
+
+/* Stagger each particle's position, size, and timing */
+.particle:nth-child(1) { left: 6%; animation-delay: 0s; animation-duration: 11s; }
+.particle:nth-child(2) { left: 14%; animation-delay: 1.2s; animation-duration: 13s; width: 3px; height: 3px; }
+.particle:nth-child(3) { left: 24%; animation-delay: 2.4s; animation-duration: 10s; }
+.particle:nth-child(4) { left: 33%; animation-delay: 3.6s; animation-duration: 14s; width: 5px; height: 5px; }
+.particle:nth-child(5) { left: 42%; animation-delay: 0.8s; animation-duration: 12s; }
+.particle:nth-child(6) { left: 51%; animation-delay: 4.8s; animation-duration: 9s; width: 3px; height: 3px; }
+.particle:nth-child(7) { left: 60%; animation-delay: 2s; animation-duration: 15s; }
+.particle:nth-child(8) { left: 68%; animation-delay: 5.6s; animation-duration: 11s; width: 4px; height: 4px; }
+.particle:nth-child(9) { left: 76%; animation-delay: 1.6s; animation-duration: 13s; }
+.particle:nth-child(10) { left: 84%; animation-delay: 3.2s; animation-duration: 10s; width: 3px; height: 3px; }
+.particle:nth-child(11) { left: 91%; animation-delay: 6.4s; animation-duration: 16s; }
+.particle:nth-child(12) { left: 96%; animation-delay: 4.2s; animation-duration: 12s; width: 5px; height: 5px; }
+
+@keyframes particle-rise {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-glow,
+  .bg-shape,
+  .particle {
+    animation: none;
+  }
+}
+
+/* ---------- App Wrapper ---------- */
+.app {
+  position: relative; /* NEW — sits above .background (z-index 0) */
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 380px;
+}
+
+/* ---------- Calculator Card (Glassmorphism) ---------- */
+.calculator {
+  position: relative;
+  width: 100%;
+  background: var(--color-glass-bg);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  /* Upgrade 3: stronger glass blur + saturation for a richer frosted look */
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  /* Upgrade 3: deeper multi-layer shadow + brighter inset border highlight */
+  box-shadow:
+    var(--shadow-card),
+    0 0 0 1px var(--color-glass-highlight) inset,
+    0 1px 0 var(--color-glass-highlight) inset,
+    0 -20px 40px -20px var(--color-accent-soft) inset;
+  animation: card-enter 0.5s var(--transition-medium), card-float 6s ease-in-out 0.5s infinite;
+  transition: background var(--transition-theme), border-color var(--transition-theme),
+    box-shadow var(--transition-theme);
+}
+
+/* Upgrade 3: subtle top border sheen for extra depth */
+.calculator::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(160deg, var(--color-glass-highlight), transparent 40%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Upgrade 3: gentle continuous floating motion */
+@keyframes card-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calculator {
+    animation: none;
+  }
+}
+
+/* ---------- Display ---------- */
+.display {
+  position: relative; /* anchors theme-toggle button + reflection sheen */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 6px;
+  min-height: 110px;
+  padding: 12px 16px 20px;
+  margin-bottom: 20px;
+  border-radius: var(--radius-md);
+  /* Upgrade 5: glass display instead of flat dark panel */
+  background: linear-gradient(160deg, var(--color-glass-bg), rgba(0, 0, 0, 0.22));
+  border: 1px solid var(--color-glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 2px 0 var(--color-glass-highlight) inset, 0 12px 24px rgba(0, 0, 0, 0.25) inset;
+  overflow: hidden;
+  transition: background var(--transition-theme), border-color var(--transition-theme);
+}
+
+/* Upgrade 5: diagonal light sheen slowly sweeping across the glass display */
+.display-reflection {
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(100deg, transparent, var(--color-glass-highlight), transparent);
+  opacity: 0.5;
+  transform: rotate(8deg);
+  animation: display-sheen 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes display-sheen {
+  0% { left: -60%; }
+  45%, 100% { left: 130%; }
+}
+
+.previous-operand {
+  font-size: clamp(0.9rem, 4vw, 1.1rem);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  min-height: 1.2em;
+  word-break: break-all;
+  text-align: right;
+  transition: opacity var(--transition-fast), color var(--transition-theme);
+}
+
+.current-operand {
+  font-size: clamp(2rem, 9vw, 2.75rem);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  word-break: break-all;
+  text-align: right;
+  width: 100%;
+  transition: font-size var(--transition-fast), color var(--transition-theme);
+}
+
+/* Upgrade 5: smooth pop-in whenever the display value updates */
+.current-operand.update {
+  animation: value-update 0.18s ease-out;
+}
+
+@keyframes value-update {
+  from { opacity: 0.4; transform: translateY(4px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .display-reflection {
+    animation: none;
+    display: none;
+  }
+  .current-operand.update {
+    animation: none;
+  }
+}
+
+/* ---------- Theme Toggle Button (Upgrade 1) ---------- */
+.theme-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+  border: 1px solid var(--color-glass-border);
+  border-radius: 50%;
+  background: var(--color-glass-bg);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform var(--transition-fast), background var(--transition-theme),
+    border-color var(--transition-theme), box-shadow var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg) scale(1.08);
+  box-shadow: 0 0 12px var(--color-accent-soft);
+}
+
+.theme-toggle:active,
+.theme-toggle.pressed {
+  transform: scale(0.9);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Error Message ---------- */
+.error-message {
+  min-height: 18px;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--color-error);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ---------- Button Grid ---------- */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* ---------- Base Button ---------- */
+.btn {
+  position: relative;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden; /* NEW — Upgrade 4: contains the ripple effect */
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  background: var(--color-number-bg);
+  box-shadow: var(--shadow-btn);
+  transition: transform var(--transition-fast), background var(--transition-theme),
+    box-shadow var(--transition-fast), color var(--transition-theme), filter var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover {
+  background: var(--color-number-bg-hover);
+  box-shadow: var(--shadow-btn-hover);
+  transform: translateY(-2px) scale(1.02); /* Upgrade 4: smoother scale on hover */
+}
+
+/* Button press animation */
+.btn:active,
+.btn.pressed {
+  transform: scale(0.92);
+  filter: brightness(1.15); /* Upgrade 4: active lighting flash */
+  transition: transform 0.08s ease, filter 0.08s ease;
+}
+
+/* Focus indicator for accessibility (keyboard navigation) */
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Upgrade 4: ripple effect element, spawned by script.js on click */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transform: scale(0);
+  pointer-events: none;
+  animation: ripple-expand 0.6s ease-out;
+}
+
+@keyframes ripple-expand {
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+/* Number buttons */
+.btn-number {
+  background: var(--color-number-bg);
+  font-weight: 400;
+}
+
+/* Function buttons: AC, ⌫, %, +/- */
+.btn-function {
+  background: var(--color-function-bg);
+  color: var(--color-function-text);
+  font-size: 1.05rem;
+}
+
+.btn-function:hover {
+  background: var(--color-function-bg-hover);
+}
+
+/* Operator buttons: ÷ × - + */
+.btn-operator {
+  background: var(--color-operator-bg);
+  color: #ffffff;
+  font-size: 1.4rem;
+}
+
+/* Upgrade 4: soft glow around operator buttons on hover */
+.btn-operator:hover {
+  background: var(--color-operator-bg-hover);
+  box-shadow: var(--shadow-btn-hover), 0 0 18px var(--color-accent-soft);
+}
+
+/* Active/selected operator (currently chosen) */
+.btn-operator.active {
+  background: var(--color-operator-active-bg);
+  color: var(--color-operator-active-text);
+  box-shadow: var(--shadow-btn-hover), 0 0 16px var(--color-accent-soft);
+}
+
+/* Equals button — warm gradient, glows a little stronger (Upgrade 4) */
+.btn-equals {
+  background: var(--color-equals-bg);
+  color: #ffffff;
+  font-size: 1.4rem;
+  grid-column: span 1;
+  box-shadow: var(--shadow-btn), 0 0 14px rgba(255, 107, 107, 0.35);
+}
+
+.btn-equals:hover {
+  background: var(--color-equals-bg-hover);
+  box-shadow: var(--shadow-btn-hover), 0 0 22px rgba(255, 107, 107, 0.5);
+}
+
+/* Zero button spans a bit wider on larger screens for balance (optional emphasis) */
+.btn[data-number="0"] {
+  font-weight: 400;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* ---------- Footer ---------- */
+.app-footer {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  max-width: 340px;
+  line-height: 1.5;
+}
+
+kbd {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: inherit;
+  font-size: 0.7rem;
+}
+
+/* ---------- Shake animation for errors ---------- */
+.shake {
+  animation: shake 0.35s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* ---------- Responsive Layout ---------- */
+
+/* Small phones */
+@media (max-width: 360px) {
+  .calculator {
+    padding: 16px;
+  }
+
+  .buttons {
+    gap: 8px;
+  }
+
+  .btn {
+    font-size: 1.05rem;
+  }
+}
+
+/* Larger screens: slightly bigger card */
+@media (min-width: 600px) {
+  .app {
+    max-width: 400px;
+  }
+
+  .btn {
+    font-size: 1.35rem;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

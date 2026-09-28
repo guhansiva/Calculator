@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium Calculator</title>
+  <meta name="description" content="A modern, premium glassmorphism calculator web application." />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Font: Inter (professional typography) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+
+  <!-- ===========================================================
+       UPGRADE 2: Layered premium background
+       Purely decorative — hidden from assistive tech.
+       Sits fixed behind the app via z-index in style.css.
+       =========================================================== -->
+  <div class="background" aria-hidden="true">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <div class="bg-particles">
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+    </div>
+  </div>
+
+  <main class="app">
+    <!-- Calculator Card -->
+    <section class="calculator" role="region" aria-label="Calculator">
+
+      <!-- Display -->
+      <div class="display" aria-live="polite">
+
+        <!-- UPGRADE 1: Theme toggle — cycles Dark → Light → AMOLED → Blue Neon -->
+        <button
+          type="button"
+          id="theme-toggle"
+          class="theme-toggle"
+          aria-label="Switch color theme"
+          title="Switch color theme"
+        >🌙</button>
+
+        <!-- UPGRADE 5: Glass reflection sheen (purely decorative) -->
+        <span class="display-reflection" aria-hidden="true"></span>
+
+        <div id="previous-operand" class="previous-operand" aria-label="Previous calculation"></div>
+        <div id="current-operand" class="current-operand" aria-label="Current input">0</div>
+      </div>
+
+      <!-- Button Grid -->
+      <div class="buttons" role="group" aria-label="Calculator buttons">
+
+        <!-- Row 1: Utility functions -->
+        <button type="button" class="btn btn-function" data-action="clear" aria-label="All Clear">AC</button>
+        <button type="button" class="btn btn-function" data-action="delete" aria-label="Delete last digit">⌫</button>
+        <button type="button" class="btn btn-function" data-action="percentage" aria-label="Percentage">%</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-operator="÷" aria-label="Divide">÷</button>
+
+        <!-- Row 2 -->
+        <button type="button" class="btn btn-number" data-action="number" data-number="7" aria-label="Seven">7</button>
+        <button type="button" class="btn btn-number" data-action="number" data-number="8" aria-label="Eight">8</button>
+        <button type="button" class="btn btn-number" data-action="number" data-number="9" aria-label="Nine">9</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-operator="×" aria-label="Multiply">×</button>
+
+        <!-- Row 3 -->
+        <button type="button" class="btn btn-number" data-action="number" data-number="4" aria-label="Four">4</button>
+        <button type="button" class="btn btn-number" data-action="number" data-number="5" aria-label="Five">5</button>
+        <button type="button" class="btn btn-number" data-action="number" data-number="6" aria-label="Six">6</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-operator="-" aria-label="Subtract">-</button>
+
+        <!-- Row 4 -->
+        <button type="button" class="btn btn-number" data-action="number" data-number="1" aria-label="One">1</button>
+        <button type="button" class="btn btn-number" data-action="number" data-number="2" aria-label="Two">2</button>
+        <button type="button" class="btn btn-number" data-action="number" data-number="3" aria-label="Three">3</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-operator="+" aria-label="Add">+</button>
+
+        <!-- Row 5 -->
+        <button type="button" class="btn btn-function" data-action="toggle-sign" aria-label="Toggle positive or negative">+/-</button>
+        <button type="button" class="btn btn-number" data-action="number" data-number="0" aria-label="Zero">0</button>
+        <button type="button" class="btn btn-number" data-action="decimal" aria-label="Decimal point">.</button>
+        <button type="button" class="btn btn-equals" data-action="calculate" aria-label="Equals">=</button>
+
+      </div>
+
+      <!-- Error message region for screen readers -->
+      <p id="error-message" class="error-message" role="alert"></p>
+
+    </section>
+
+    <footer class="app-footer">
+      <p>Use your keyboard: numbers, <kbd>+</kbd> <kbd>-</kbd> <kbd>*</kbd> <kbd>/</kbd>, <kbd>Enter</kbd> for “=”, <kbd>Esc</kbd> for “AC”, <kbd>Backspace</kbd> to delete.</p>
+    </footer>
+  </main>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
